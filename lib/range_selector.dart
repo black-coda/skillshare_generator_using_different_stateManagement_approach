@@ -4,15 +4,12 @@ import 'package:skillshare_generator/randominizer_page.dart';
 
 import 'range_selector_form.dart';
 
-class RangeSelectorPage extends HookWidget {
+class RangeSelectorPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   RangeSelectorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final min = useState<int>(0);
-    final max = useState<int>(0);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -20,8 +17,6 @@ class RangeSelectorPage extends HookWidget {
         ),
         body: RangeForm(
           formKey: formKey,
-          minValueSetter: (value) => min.value = value,
-          maxValueSetter: (value) => max.value = value,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -34,10 +29,7 @@ class RangeSelectorPage extends HookWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return RandomizerPage(
-                      max: max.value,
-                      min: min.value,
-                    );
+                    return RandomizerPage();
                   },
                 ),
               );
