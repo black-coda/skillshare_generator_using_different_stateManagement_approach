@@ -1,21 +1,18 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-class RandomizerPage extends HookWidget {
-  final int max, min;
-  final randomGenerated = Random();
+// import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:provider/provider.dart';
 
-  RandomizerPage({
+import 'randomizerChangeNotifier.dart';
+
+class RandomizerPage extends StatelessWidget {
+  const RandomizerPage({
     super.key,
-    required this.min,
-    required this.max,
   });
 
   @override
   Widget build(BuildContext context) {
-    final generatedNumber = useState<int?>(null);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -26,12 +23,27 @@ class RandomizerPage extends HookWidget {
           children: [
             Column(
               children: [
-                Center(
-                  child: Text(
-                    generatedNumber.value?.toString() ?? "Generated a number",
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ),
+                Center(child: Consumer<RandomizerChangeNotifier>(
+                  builder: (context, notifier, child) {
+                    // Function of notifier() in the randomChangeNotifier
+                    return Text(
+                      notifier.generatedNumber?.toString() ??
+                          "Generated a number",
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  },
+                )
+                    // Text(
+                    //   // Reading value from notifier not watching it
+                    //   // Wrong line of code, because it is not rebuiling the widget
+                    //   // context
+                    //   //         .read<RandomizerChangeNotifier>()
+                    //   //         .generatedNumber
+                    //   //         ?.toString() ??
+                    //   //     "Generated a number",
+                    //   style: Theme.of(context).textTheme.headline4,
+                    // ),
+                    ),
               ],
             )
           ],
@@ -40,8 +52,8 @@ class RandomizerPage extends HookWidget {
           padding: const EdgeInsets.all(8.0),
           child: FloatingActionButton.extended(
             onPressed: () {
-              generatedNumber.value =
-                  min + randomGenerated.nextInt(max + 1 - min);
+              // calling generateRandomNumber from RandomizerChangeNotifier
+              context.read<RandomizerChangeNotifier>().generateRandomNumber();
             },
             label: const Text("Generate"),
           ),
