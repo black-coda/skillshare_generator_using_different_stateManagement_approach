@@ -35,7 +35,7 @@ class RandomizerPage extends StatelessWidget {
                 )
                     // Text(
                     //   // Reading value from notifier not watching it
-                    //   // Wrong line of code, because it is not rebuiling the widget
+                    //   // Wrong line of code, because it is not rebuilding the widget
                     //   // context
                     //   //         .read<RandomizerChangeNotifier>()
                     //   //         .generatedNumber
