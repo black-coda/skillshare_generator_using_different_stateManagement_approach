@@ -1,18 +1,21 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skillshare_generator/main.dart';
 
 // import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 import 'randomizerChangeNotifier.dart';
 
-class RandomizerPage extends StatelessWidget {
+class RandomizerPage extends ConsumerWidget {
   const RandomizerPage({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final randomizer = ref.watch(randomizerProvider);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -23,15 +26,11 @@ class RandomizerPage extends StatelessWidget {
           children: [
             Column(
               children: [
-                Center(child: Consumer<RandomizerChangeNotifier>(
-                  builder: (context, notifier, child) {
-                    // Function of notifier() in the randomChangeNotifier
-                    return Text(
-                      notifier.generatedNumber?.toString() ??
-                          "Generated a number",
-                      style: Theme.of(context).textTheme.headline4,
-                    );
-                  },
+                Center(
+                    child: Text(
+                  randomizer.generatedNumber?.toString() ??
+                      "Generated a number",
+                  style: Theme.of(context).textTheme.headline4,
                 )
                     // Text(
                     //   // Reading value from notifier not watching it
@@ -53,7 +52,7 @@ class RandomizerPage extends StatelessWidget {
           child: FloatingActionButton.extended(
             onPressed: () {
               // calling generateRandomNumber from RandomizerChangeNotifier
-              context.read<RandomizerChangeNotifier>().generateRandomNumber();
+              ref.read(randomizerProvider).generateRandomNumber();
             },
             label: const Text("Generate"),
           ),

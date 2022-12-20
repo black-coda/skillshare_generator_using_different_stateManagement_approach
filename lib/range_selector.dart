@@ -6,7 +6,6 @@ import 'range_selector_form.dart';
 
 class RangeSelectorPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
-  final _controller = TextEditingController.fromValue(TextEditingValue(text: "Initial Value"));
   RangeSelectorPage({super.key});
 
   @override
@@ -30,7 +29,7 @@ class RangeSelectorPage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return RandomizerPage();
+                    return const RandomizerPage();
                   },
                 ),
               );
