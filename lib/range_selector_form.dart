@@ -27,7 +27,7 @@ class RangeForm extends ConsumerWidget {
               label: "Minimum",
               // assigning value in CustomNotifier (min and max) to value passed from callback intValueSetter
               onSavedSetter: (value) =>
-                  ref.read(randomizerProvider).min = value,
+                  ref.read(randomizerProvider.notifier).setMin(value),
             ),
             const SizedBox(
               height: 20,
@@ -35,7 +35,7 @@ class RangeForm extends ConsumerWidget {
             RangeSelectorTextFormField(
               label: "Maximum",
               onSavedSetter: (value) =>
-                  ref.read(randomizerProvider).max = value,
+                  ref.read(randomizerProvider.notifier).setMax(value),
             ),
           ],
         ),

@@ -16,3 +16,9 @@ There are three components
     ChangeNotifier.
     ChangeNotifierProvider
     Consumer
+
+State Notifier
+    Always seperated Actual state / fields from the class wich changes the state
+
+    e.g _randomGenerator which is a fields
+    e.g  min, max and _generatedNumber are the state

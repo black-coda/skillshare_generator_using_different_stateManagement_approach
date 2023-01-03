@@ -15,6 +15,7 @@ class RandomizerPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //Watching when state changes
     final randomizer = ref.watch(randomizerProvider);
     return SafeArea(
       child: Scaffold(
@@ -28,6 +29,7 @@ class RandomizerPage extends ConsumerWidget {
               children: [
                 Center(
                     child: Text(
+                  //Watch using ref.watch
                   randomizer.generatedNumber?.toString() ??
                       "Generated a number",
                   style: Theme.of(context).textTheme.headline4,
@@ -52,7 +54,7 @@ class RandomizerPage extends ConsumerWidget {
           child: FloatingActionButton.extended(
             onPressed: () {
               // calling generateRandomNumber from RandomizerChangeNotifier
-              ref.read(randomizerProvider).generateRandomNumber();
+              ref.read(randomizerProvider.notifier).generateRandomNumber();
             },
             label: const Text("Generate"),
           ),

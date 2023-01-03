@@ -10,7 +10,9 @@ void main() {
 }
 
 //Riverpod Randomizer provider
-final randomizerProvider = ChangeNotifierProvider((ref)=> RandomizerChangeNotifier());
+final randomizerProvider =
+    StateNotifierProvider<RandomizerStateNotifier, RandomizerState>(
+        (ref) => RandomizerStateNotifier());
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
